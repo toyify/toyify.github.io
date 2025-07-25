@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | Toyify</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fefefe;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+            background: linear-gradient(45deg, #ff6b6b, #ffd93d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        /* Blog Header */
+        .blog-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .blog-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .blog-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Blog Content */
+        .blog-content {
+            padding: 4rem 0;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .blog-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .blog-card-image {
+            height: 200px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        .blog-card-content {
+            padding: 2rem;
+        }
+
+        .blog-card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+            line-height: 1.3;
+        }
+
+        .blog-card h2 a {
+            color: #333;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .blog-card h2 a:hover {
+            color: #667eea;
+        }
+
+        .blog-card-excerpt {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .read-more {
+            display: inline-block;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .read-more:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .blog-meta {
+            color: #999;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+
+        footer p {
+            opacity: 0.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .blog-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .blog-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Icons for different blog topics */
+        .icon-creativity::before { content: "🎨"; }
+        .icon-development::before { content: "🧠"; }
+        .icon-drawing::before { content: "✏️"; }
+        .icon-magic::before { content: "✨"; }
+        .icon-gifts::before { content: "🎁"; }
+        .icon-3d::before { content: "🖨️"; }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">Toyify</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#process">How It Works</a></li>
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="blog-header">
+        <div class="container">
+            <h1>Our Blog</h1>
+            <p>Discover the magic of creativity, learn about child development, and explore the wonderful world of turning drawings into toys.</p>
+        </div>
+    </section>
+
+    <main class="blog-content">
+        <div class="container">
+            <div class="blog-grid">
+                
+                <article class="blog-card">
+                    <div class="blog-card-image icon-creativity">
+                        🎨
+                    </div>
+                    <div class="blog-card-content">
+                        <div class="blog-meta">Latest Post</div>
+                        <h2><a href="#post1">Create Custom Toys from Your Child's Drawings: Personalized Gifts for Every Occasion</a></h2>
+                        <div class="blog-card-excerpt">
+                            At Toyify, we turn your child's drawing into custom toys. Whether it's a custom toy car, custom toy truck, or custom toy soldiers, we bring art to life with 3D printing. These personalized creations make memorable gifts for any occasion.
+                        </div>
+                        <a href="#post1" class="read-more">Read More</a>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <div class="blog-card-image icon-development">
+                        🧠
+                    </div>
+                    <div class="blog-card-content">
+                        <div class="blog-meta">Child Development</div>
+                        <h2><a href="#post2">How to Foster Creativity in Kids in a Screen-Saturated World</a></h2>
+                        <div class="blog-card-excerpt">
+                            In today's digital era, it's easy for kids to be glued to screens, with the average child spending about seven hours a day on devices. Learn how to encourage hands-on creative play and balance technology with imagination.
+                        </div>
+                        <a href="#post2" class="read-more">Read More</a>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <div class="blog-card-image icon-development">
+                        🧠
+                    </div>
+                    <div class="blog-card-content">
+                        <div class="blog-meta">Child Development</div>
+                        <h2><a href="#post3">The Benefits of Creative Play: How Drawing and Custom Toys Boost Child Development</a></h2>
+                        <div class="blog-card-excerpt">
+                            Creative play is more than just fun—it's vital for development. Activities like drawing and playing with custom toys stimulate imagination, encourage problem-solving, and help children develop important cognitive and emotional skills.
+                        </div>
+                        <a href="#post3" class="read-more">Read More</a>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <div class="blog-card-image icon-drawing">
+                        ✏️
+                    </div>
+                    <div class="blog-card-content">
+                        <div class="blog-meta">Creative Ideas</div>
+                        <h2><a href="#post4">Top 10 Creative Drawing Ideas for Kids: Inspire Your Little Artist</a></h2>
+                        <div class="blog-card-excerpt">
+                            Encouraging your child's creativity is one of the best gifts you can give them. Here are ten creative drawing prompts that are sure to spark their imagination, from dream pets to magical kingdoms.
+                        </div>
+                        <a href="#post4" class="read-more">Read More</a>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <div class="blog-card-image icon-magic">
+                        ✨
+                    </div>
+                    <div class="blog-card-content">
+                        <div class="blog-meta">Our Process</div>
+                        <h2><a href="#post5">The Magic of Turning Imagination into Reality: How We Bring Your Drawings to Life</a></h2>
+                        <div class="blog-card-excerpt">
+                            At Toyify.uk, we believe that every child's imagination deserves to be celebrated. Discover the magical process of transforming your child's drawings into tangible, custom-made toys through our step-by-step journey.
+                        </div>
+                        <a href="#post5" class="read-more">Read More</a>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <div class="blog-card-image icon-gifts">
+                        🎁
+                    </div>
+                    <div class="blog-card-content">
+                        <div class="blog-meta">Gift Ideas</div>
+                        <h2><a href="#post6">Why Personalised Toys Make the Best Gifts</a></h2>
+                        <div class="blog-card-excerpt">
+                            In a world full of mass-produced toys, personalised gifts stand out for their uniqueness and emotional value. When you give a child a toy based on their own drawing, you're giving them a piece of their imagination brought to life.
+                        </div>
+                        <a href="#post6" class="read-more">Read More</a>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <div class="blog-card-image icon-3d">
+                        🖨️
+                    </div>
+                    <div class="blog-card-content">
+                        <div class="blog-meta">Technology & Magic</div>
+                        <h2><a href="#post7">Turning Kids' Drawings into 3D Printed Toys: A Magical Experience with Toyify.uk</a></h2>
+                        <div class="blog-card-excerpt">
+                            Imagine a world where a child's creativity leaps off the page and becomes a real, tangible toy. At Toyify.uk, we use cutting-edge 3D printing technology to transform kids' drawings into custom toys, making their dreams a reality. Discover how our process combines technology and imagination to create magical experiences for families.
+                        </div>
+                        <a href="#post7" class="read-more">Read More</a>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Toyify.uk. All rights reserved. | Made with love and imagination.</p>
+        </div>
+    </footer>
+</body>
+</html>

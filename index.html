@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toyify | Turn Drawings Into 3D Toys</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fefefe;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+            background: linear-gradient(45deg, #ff6b6b, #ffd93d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b6b, #ffd93d);
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        /* Deal Banner */
+        .deal-banner {
+            background: linear-gradient(45deg, #ff6b6b, #ffd93d);
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 4rem 0;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .process-section {
+            background: #f8f9fa;
+            padding: 4rem 0;
+            border-radius: 20px;
+            margin: 2rem 0;
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .step {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .step:hover {
+            transform: translateY(-5px);
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 50%;
+            line-height: 60px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .step h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .step p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Gallery Section */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .gallery-item {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.02);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .gallery-item-content {
+            padding: 1.5rem;
+        }
+
+        .gallery-item h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .gallery-item p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Services Section */
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border-left: 5px solid #667eea;
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .service-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .service-sizes {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .size-badge {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            border-radius: 20px;
+            margin: 2rem 0;
+        }
+
+        .contact h2 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .contact p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .contact-button {
+            display: inline-block;
+            background: white;
+            color: #667eea;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .contact-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        footer p {
+            opacity: 0.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">Toyify</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#process">How It Works</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="deal-banner">
+        ⋆ 💸 EASTER Deals - 50% Off 💸 ⋆
+    </div>
+
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Turn Children's Drawings Into Real Toys</h1>
+            <p>Toyify bridges the gap between your creative vision and a meaningful, personalised gift, setting it apart as a memorable and emotionally engaging service.</p>
+            <a href="#contact" class="cta-button">Let's Toyify it!</a>
+        </div>
+    </section>
+
+    <main class="main-content">
+        <div class="container">
+            <section class="section" id="about">
+                <h2>You Draw, We Make It!</h2>
+                <p style="text-align: center; font-size: 1.2rem; color: #666; max-width: 800px; margin: 0 auto;">
+                    We bring your drawings into reality with the power of digital design, 3D printing and our craftmanship. 
+                    Whatever you and your beloved ones imagine can be crafted by us.
+                </p>
+            </section>
+
+            <section class="process-section" id="process">
+                <div class="container">
+                    <h2>How It Works</h2>
+                    <div class="process-steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <h3>Draw Your Idea</h3>
+                            <p>Let your imagination run wild! Draw anything you can think of - robots, animals, fantastical creatures, or anything that brings joy to your heart.</p>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <h3>Upload & Share</h3>
+                            <p>Send us your drawing through our simple upload process. Our team will review your creation and prepare it for transformation.</p>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <h3>We Create Magic</h3>
+                            <p>Our skilled designers transform your 2D drawing into a detailed 3D model, preserving every unique detail and character.</p>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <h3>3D Print & Deliver</h3>
+                            <p>Using high-quality, child-safe materials, we 3D print your custom toy and deliver it right to your doorstep.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="services">
+                <h2>Our Services</h2>
+                <div class="services">
+                    <div class="service-card">
+                        <h3>Custom 3D Toys</h3>
+                        <p>We craft your drawing in 3 different heights to choose from. Each toy is unique and made with love, turning your child's imagination into a cherished keepsake.</p>
+                        <div class="service-sizes">
+                            <span class="size-badge">Small</span>
+                            <span class="size-badge">Medium</span>
+                            <span class="size-badge">Large</span>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <h3>Exclusive Workshops</h3>
+                        <p>We offer limited workshops where we demonstrate how kids' drawings can be modeled and printed. A great educational experience for children and families!</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Custom Requests</h3>
+                        <p>Looking for something special? Whatever brings joy to your heart, just write to us. We love creating unique, personalized solutions for our customers.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>Gallery</h2>
+                <div class="gallery">
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=250&fit=crop" alt="3D Printer at work">
+                        <div class="gallery-item-content">
+                            <h3>3D Printing in Action</h3>
+                            <p>Watch the magic happen as drawings come to life through our advanced 3D printing technology.</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=400&h=250&fit=crop" alt="Colorful toys">
+                        <div class="gallery-item-content">
+                            <h3>Colorful Creations</h3>
+                            <p>From vibrant animals to imaginative characters, every toy is a unique masterpiece.</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1587654780291-39c9404d746b?w=400&h=250&fit=crop" alt="Child with drawing">
+                        <div class="gallery-item-content">
+                            <h3>Happy Artists</h3>
+                            <p>Nothing brings us more joy than seeing children's faces light up when they see their creations come to life.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <p>We love to hear from you! Ready to bring your drawings to life?</p>
+            <a href="mailto:hello@toyify.uk" class="contact-button">Get In Touch</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Toyify.uk - Turning imagination into reality, one drawing at a time.</p>
+        </div>
+    </footer>
+</body>
+</html>
